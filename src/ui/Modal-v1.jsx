@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
-import { cloneElement, createContext, useContext, useState } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -54,50 +53,20 @@ const Button = styled.button`
 `;
 
 ///////////////////////////////////////////////
-// Converting the Modal to a Compound Component
-const ModalContext = createContext();
-
-function Modal({ children }) {
-  const [openName, setOpenName] = useState("");
-
-  const close = () => setOpenName("");
-  const open = setOpenName;
-
-  return (
-    <ModalContext.Provider value={{ openName, close, open }}>
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-function Open({ children, opens: opensWindowName }) {
-  const { open } = useContext(ModalContext);
-
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
-}
-
-///////////////////////////////////////////////
 // Building a Modal Window Using a React Portal
-function Window({ children, name }) {
-  const { openName, close } = useContext(ModalContext);
-
-  if (name !== openName) return;
-
+function Modal({ children, onClose }) {
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={close}>
+        <Button onClick={onClose}>
           <HiXMark />
         </Button>
 
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>{children}</div>
       </StyledModal>
     </Overlay>,
     document.body
   );
 }
-
-Modal.Open = Open;
-Modal.Window = Window;
 
 export default Modal;
