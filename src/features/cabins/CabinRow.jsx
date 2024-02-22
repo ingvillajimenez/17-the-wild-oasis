@@ -54,8 +54,7 @@ function CabinRow({ cabin }) {
   ////////////////////////////////////////////
   // Abstracting React Query Into Custom Hooks
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { isCreating, createCabin } = useCreateCabin();
-  console.log(isCreating);
+  const { createCabin } = useCreateCabin();
 
   const {
     id: cabinId,
