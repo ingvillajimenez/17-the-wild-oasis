@@ -100,6 +100,8 @@ async function createBookings() {
   if (error) console.log(error.message);
 }
 
+////////////////////////
+// Uploading Sample Data
 function Uploader() {
   const [isLoading, setIsLoading] = useState(false);
 
