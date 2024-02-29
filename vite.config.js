@@ -5,5 +5,5 @@ import eslint from "vite-plugin-eslint";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), eslint()],
-  base: "/17-wild-oasis/",
+  base: "https://ingvillajimenez.github.io/17-the-wild-oasis",
 });
